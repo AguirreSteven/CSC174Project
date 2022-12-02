@@ -1,0 +1,48 @@
+CREATE TABLE Library(
+    BranchNum int primary key,
+    phoneNum varchar(10),
+    streetNum varchar(10),
+    streetName varchar(20),
+    City varchar(20),
+    zip int
+);
+
+CREATE TABLE Item (
+    CallNumber int primary key ,
+    ItemStatus enum ('Out','waiting','available') not null ,
+    Genre varchar(20),
+    iType enum ('Book','Media') not null ,
+    Author varchar(25),
+    Director varchar(25)
+);
+
+CREATE TABLE Member(
+    UID int NOT NULL,
+    mType enum ('member','employee'),
+    DOB date,
+    Name varchar(40),
+    StreetNum varchar(10),
+    StreetName varchar(20),
+    City varchar(20),
+    ZipCode int,
+    BranchNum int,
+    CONSTRAINT fk_mainBranch FOREIGN KEY (BranchNum) REFERENCES Library(BranchNum),
+    CONSTRAINT pk_member PRIMARY KEY (UID)
+);
+
+CREATE TABLE Borrows(
+    DueDate date,
+    UID int not null ,
+    CallNumber int not null,
+    CONSTRAINT fk_user FOREIGN KEY (UID)
+                    REFERENCES Member(UID),
+    CONSTRAINT fk_item FOREIGN KEY (CallNumber)
+                    REFERENCES Item(CallNumber)
+);
+
+CREATE Table Member_phone(
+    UID int primary key,
+    PhoneNum varchar(10) not null,
+    CONSTRAINT fk_member FOREIGN KEY (UID)
+                    REFERENCES Member(UID)
+);

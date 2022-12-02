@@ -36,12 +36,14 @@ Zip Code: <input type = "text" name = "ZipCode" pattern = "[0-9]{0,5}">&nbsp;5 N
 </html>
 
 <?php
+
+//database access credentials
 $servername = "ecs-pd-proj-db.ecs.csus.edu";
 $database = "CSC174003";
 $username = "CSC174003";
 $password = "Csc134_907442822";
 
-
+//connects to the MySQL server
 $conn = mysqli_connect($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
@@ -50,9 +52,9 @@ if ($conn->connect_error) {
     echo "SQL Connection Successful!<br>";
 }
 
+mysqli_close($conn);
 
-mysqli_query($conn, "SELECT * FROM Member");
-
+//when the submission button is clicked, pass user inputs into the database
 if (isset($_POST['submit'])) {
     $UID = rand(0,99999);
     $mType = "Member";
@@ -79,6 +81,7 @@ if (isset($_POST['submit'])) {
         die('There was an error running the query [' . $conn->error . ']');
     } else {
         echo "\n\nRecord has been successfully added!";
+        mysqli_close($conn);
     };
 
 }

@@ -64,8 +64,7 @@ if (isset($_POST['submit'])) {
     $StreetNum = "6000";
     $StreetName = "Jed Smith Dr";
     $City = "Sacramento";
-    $ZipCode = "95819";
-    $BranchNo = 001;
+    $ZipCode = 95819;
 
     $query = "INSERT INTO Member(UID, mType, DOB, Name, StreetNum, StreetName, City, ZipCode
     ) VALUES (

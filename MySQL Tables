@@ -46,3 +46,14 @@ CREATE Table Member_phone(
     CONSTRAINT fk_member FOREIGN KEY (UID)
                     REFERENCES Member(UID)
 );
+
+delimiter //
+CREATE TRIGGER check_zip BEFORE INSERT ON Member
+    FOR EACH ROW
+    IF NEW.ZipCode != 95826 || NEW.ZipCode != 95819 THEN
+        SIGNAL SQLSTATE '50001' SET MESSAGE_TEXT = 'must live in 95826 or 95819 zip code.';
+    end if; //
+    delimiter ;
+
+delimiter //
+

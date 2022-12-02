@@ -50,7 +50,7 @@ CREATE Table Member_phone(
 delimiter //
 CREATE TRIGGER check_zip BEFORE INSERT ON Member
     FOR EACH ROW
-    IF NEW.ZipCode != 95826 || NEW.ZipCode != 95819 THEN
+    IF NEW.ZipCode != 95819 THEN
         SIGNAL SQLSTATE '50001' SET MESSAGE_TEXT = 'must live in 95826 or 95819 zip code.';
     end if; //
     delimiter ;

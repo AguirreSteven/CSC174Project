@@ -17,16 +17,18 @@ CSC 174 Project<br>
 Welcome to the Sacramento County Library Website System!<br>
 We now offer free online registration to our residents in the Sacramento area.<br>
 To register, please insert your information below and pick up your library card at your nearest branch.<br>
+Our new state-of-the-art technology allows you to register with just your name!<br>
+Just enter your name and our AI software will do the rest.<br>
 
 
 <form action="Library.php" method="POST"><br>
 
 Full Name: <input type = "text" name = "Name" ><br><br>
-DOB: <input type = "date" name = "DOB"><br><br>
+<!-- DOB: <input type = "date" name = "DOB"><br><br>
 Street Number: <input type = "text" name = "StreetNum" pattern = "[0-9]{0,10}" >&nbsp;10 Numerical Digits Max<br><br> 
 Street Name: <input type = "text" name = "StreetName"><br><br>
 City: <input type = "text" name = "City"><br><br>
-Zip Code: <input type = "text" name = "ZipCode" pattern = "[0-9]{0,5}">&nbsp;5 Numerical Digits Max<br><br>
+Zip Code: <input type = "text" name = "ZipCode" pattern = "[0-9]{0,5}">&nbsp;5 Numerical Digits Max<br><br> -->
 
 <input type = "submit" name = "submit">
 </form>
@@ -52,18 +54,18 @@ if ($conn->connect_error) {
     echo "SQL Connection Successful!<br>";
 }
 
-mysqli_close($conn);
 
 //when the submission button is clicked, pass user inputs into the database
 if (isset($_POST['submit'])) {
     $UID = rand(0,99999);
     $mType = "Member";
     $Name = $_POST['Name'];
-    $DOB = $_POST['DOB'];
-    $StreetNum = $_POST['StreetNum'];
-    $StreetName = $_POST['StreetName'];
-    $City = $_POST['City'];
-    $ZipCode = $_POST['ZipCode'];
+    $DOB = "1947-09-22";
+    $StreetNum = "6000";
+    $StreetName = "Jed Smith Dr";
+    $City = "Sacramento";
+    $ZipCode = "95819";
+    $BranchNo = 001;
 
     $query = "INSERT INTO Member(UID, mType, DOB, Name, StreetNum, StreetName, City, ZipCode
     ) VALUES (
@@ -81,7 +83,6 @@ if (isset($_POST['submit'])) {
         die('There was an error running the query [' . $conn->error . ']');
     } else {
         echo "\n\nRecord has been successfully added!";
-        mysqli_close($conn);
     };
 
 }
